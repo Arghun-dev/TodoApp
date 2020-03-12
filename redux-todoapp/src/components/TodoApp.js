@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import {withStyles} from '@material-ui/styles';
 
 import TodoForm from './TodoForm';
+import TodoList from './TodoList';
 
 const styles = {
     containerPaper: {
@@ -27,6 +28,7 @@ function TodoApp({classes}){
                         <h1 style={{textAlign: 'center'}}>Redux TodoApp</h1>
                         <Paper className={classes.innerPaper}>
                             <TodoForm />
+                            <TodoList />
                         </Paper> 
                     </Grid>
                 </Paper>
