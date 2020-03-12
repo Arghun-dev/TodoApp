@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {withStyles} from '@material-ui/styles';
-
+import { connect } from 'react-redux';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
@@ -19,13 +19,13 @@ const styles = {
     }
 }
 
-function TodoApp({classes}){
+function TodoApp({classes,Theme, dispatch}){
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Paper className={classes.containerPaper}>
+                <Paper className={classes.containerPaper} style={{backgroundColor: Theme ? 'black' : 'white'}}>
                     <Grid item xs={6}>
-                        <h1 style={{textAlign: 'center'}}>Redux TodoApp</h1>
+                        <h1 style={{textAlign: 'center', color: Theme ? 'white' : 'black'}}>Redux TodoApp</h1>
                         <Paper className={classes.innerPaper}>
                             <TodoForm />
                             <TodoList />
@@ -37,4 +37,10 @@ function TodoApp({classes}){
     )
 }
 
-export default withStyles(styles)(TodoApp);
+const mapStateToProps = state => {
+    return {
+        Theme: state.Theme
+    }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(TodoApp));

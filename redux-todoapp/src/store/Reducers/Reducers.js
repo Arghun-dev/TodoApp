@@ -2,12 +2,14 @@ import * as ACTIONTYPES from '../Actions/ActionTypes';
 import { combineReducers } from 'redux';
 import uuid from 'uuid/v4';
 
-export const initialTodos = [
+const initialTodos = [
     {id: 1, task: 'React', completed: false, isEditing: false},
     {id: 2, task: 'Vue', completed: false, isEditing: false}
 ]
 
-export const TodosReducer = (todos = initialTodos, action) => {
+const initialThemeStatus = false
+
+const TodosReducer = (todos = initialTodos, action) => {
     switch(action.type){
         case ACTIONTYPES.ADDTODO:
             return [...todos, {id: uuid(), task: action.newTodo, completed: false}]
@@ -24,7 +26,17 @@ export const TodosReducer = (todos = initialTodos, action) => {
     }
 }
 
+const ThemeReducer = (state = initialThemeStatus, action) => {
+    switch(action.type) {
+        case ACTIONTYPES.TOGGLETHEME:
+            return !state
+        default:
+            return state
+    }
+}
+
 export default combineReducers({
-    Todos: TodosReducer
+    Todos: TodosReducer,
+    Theme: ThemeReducer
 })
 

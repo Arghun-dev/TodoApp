@@ -4,9 +4,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Switch from '@material-ui/core/Switch';
 import {withStyles} from '@material-ui/styles';
+import { connect } from 'react-redux';
+import * as Actions from '../store/Actions/Actions';
 
 const styles = {
     root: {
@@ -20,23 +21,30 @@ const styles = {
     }
 }
 
-function Navbar({classes}){
+function Navbar({classes, Theme, dispatch}){
     return (
-        <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor: Theme ? 'white' : '#1565c0'}}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <Switch
-                value="checkedA"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
+              onClick={() => dispatch(Actions.toggleTheme())}
             />
           </IconButton>
-          <Typography className={classes.title} variant="h6">
-            News
+          <Typography className={classes.title} variant="h6" style={{color: Theme ? 'black' : 'white'}}>
+            {Theme ? 'Dark Mode' : 'Light Mode'}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" style={{color: Theme ? 'black' : 'white'}}>
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
     )
 }
 
-export default withStyles(styles)(Navbar);
+const mapStateToProps = state => {
+  return {
+    Theme: state.Theme
+  }
+}
+
+export default connect(mapStateToProps, null)(withStyles(styles)(Navbar));
