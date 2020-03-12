@@ -20,3 +20,10 @@ export const toggleTodo = (todoId) => {
         todoId
     }
 }
+
+export const toggleEdit = (todoId) => {
+    return {
+        type: ACTIONTYPES.TOGGLEEDIT,
+        todoId
+    }
+}

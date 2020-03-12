@@ -4,7 +4,12 @@ import TodoItem from './TodoItem';
 
 function TodoList({Todos}){
     const todos = Todos.map(todo => (
-        <TodoItem task={todo.task} id={todo.id} completed={todo.completed} />
+        <TodoItem 
+            task={todo.task} 
+            id={todo.id} 
+            completed={todo.completed} 
+            isEditing={todo.isEditing} 
+        />
     ))
     return (
         <div>{todos}</div>
@@ -12,7 +17,6 @@ function TodoList({Todos}){
 }
 
 const mapStateToProps = state => {
-    console.log(state.Todos)
     return {
         Todos: state.Todos
     }

@@ -8,12 +8,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import EditForm from './EditForm';
 import { connect } from 'react-redux';
 import * as Actions from '../store/Actions/Actions';
 
-function TodoItem({task, id, completed, dispatch}){
+
+function TodoItem({task, id, completed, dispatch, isEditing}){
     return (
         <List>
+        {isEditing ? <EditForm /> : 
         <ListItem role={undefined} dense button>
             <ListItemIcon onClick={() => dispatch(Actions.toggleTodo(id))}>
               <Checkbox
@@ -25,14 +28,15 @@ function TodoItem({task, id, completed, dispatch}){
             </ListItemIcon>
             <ListItemText primary={task} style={{textDecoration: completed ? 'line-through' : ''}} />
             <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="comments">
+              <IconButton edge="end" aria-label="comments" onClick={() => dispatch(Actions.toggleEdit(id))}>
                 <EditIcon />
               </IconButton>
               <IconButton edge="end" aria-label="comments" onClick={() => dispatch(Actions.removeTodo(id))}>
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
-          </ListItem>
+        </ListItem>
+        }
         </List>
     )
 }
