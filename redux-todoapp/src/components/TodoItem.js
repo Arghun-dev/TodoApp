@@ -16,7 +16,7 @@ import * as Actions from '../store/Actions/Actions';
 function TodoItem({task, id, completed, dispatch, isEditing}){
     return (
         <List>
-        {isEditing ? <EditForm /> : 
+        {isEditing ? <EditForm task={task} id={id} /> : 
         <ListItem role={undefined} dense button>
             <ListItemIcon onClick={() => dispatch(Actions.toggleTodo(id))}>
               <Checkbox

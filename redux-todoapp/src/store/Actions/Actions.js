@@ -14,6 +14,14 @@ export const removeTodo = (todoId) => {
     }
 }
 
+export const editTodo = (todoId, newTodo) => {
+    return {
+        type: ACTIONTYPES.EDITTODO,
+        todoId,
+        newTodo
+    }
+}
+
 export const toggleTodo = (todoId) => {
     return {
         type: ACTIONTYPES.TOGGLETODO,
